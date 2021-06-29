@@ -5,7 +5,7 @@ import { DownloadOutlined } from "@ant-design/icons";
 import "./App.css";
 import draw from "./helpers/draw";
 
-const CANVAS_WIDTH = 60;
+const CANVAS_WIDTH = 120;
 const CANVAS_HEIGHT = (3 / 2) * CANVAS_WIDTH;
 
 function App() {

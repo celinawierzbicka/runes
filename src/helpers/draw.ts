@@ -8,14 +8,15 @@ interface IDrawParams {
 }
 
 const draw = ({ ctx, number, width, height }: IDrawParams) => {
-  const baseNumbers = getBaseNumbersCoordinates({ width });
+  const lineWidth = 4;
+  const baseNumbers = getBaseNumbersCoordinates({ width, lineWidth });
 
   ctx.beginPath();
 
   // draw vertical line common for all numbers
-  ctx.moveTo(width / 2, 0);
-  ctx.lineTo(width / 2, height);
-  ctx.lineWidth = 3;
+  ctx.moveTo(width / 2, lineWidth / 2);
+  ctx.lineTo(width / 2, height - lineWidth / 2);
+  ctx.lineWidth = lineWidth;
 
   const numberArray = number.toString().split("");
 
