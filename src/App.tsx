@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Alert, Button, Input, Typography } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+
+import Canvas from "./components/Canvas";
+import DownloadButton from "./components/DownloadButton";
+import Header from "./components/Header";
+import Input from "./components/Input";
+import draw from "./helpers/draw";
 
 import "./App.css";
-import draw from "./helpers/draw";
 
 const CANVAS_WIDTH = 120;
 const CANVAS_HEIGHT = (3 / 2) * CANVAS_WIDTH;
@@ -38,32 +41,10 @@ function App() {
   return (
     <div className="app">
       <div className="content">
-        <Typography.Title className="title">Runic numbers</Typography.Title>
-        <Typography.Text className="subtitle">
-          Enter number between 1 and 9999 to reveal it's runic symbol!
-        </Typography.Text>
-        <div className="input-wrapper">
-          <Input
-            className="input"
-            type="number"
-            min={1}
-            max={9999}
-            placeholder="Enter number..."
-            value={number || ""}
-            onChange={onChange}
-          />
-          {error && <Alert className="alert" message={error} type="error" />}
-        </div>
-        <div className="canvas-wrapper">
-          <canvas width={CANVAS_WIDTH} height={CANVAS_HEIGHT} ref={canvasRef}>
-            Your browser does not support the HTML 5 Canvas.
-          </canvas>
-        </div>
-        {number && (
-          <a download={`${number}.png`} href={href}>
-            <Button icon={<DownloadOutlined />}>Download</Button>
-          </a>
-        )}
+        <Header />
+        <Input number={number} onChange={onChange} error={error} />
+        <Canvas width={CANVAS_WIDTH} height={CANVAS_HEIGHT} canvasRef={canvasRef}/>
+        {number && <DownloadButton number={number} href={href} />}
       </div>
     </div>
   );
