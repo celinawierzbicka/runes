@@ -9,11 +9,13 @@ interface IDrawParams {
 
 const draw = ({ ctx, number, width, height }: IDrawParams) => {
   const lineWidth = 4;
+
+  //get coordinates to draw numbers 0 - 9
   const baseNumbers = getBaseNumbersCoordinates({ width, lineWidth });
 
   ctx.beginPath();
 
-  // draw vertical line common for all numbers
+  // draw vertical line - it is a common element for any number
   ctx.moveTo(width / 2, lineWidth / 2);
   ctx.lineTo(width / 2, height - lineWidth / 2);
   ctx.lineWidth = lineWidth;
@@ -21,7 +23,7 @@ const draw = ({ ctx, number, width, height }: IDrawParams) => {
   const numberArray = number.toString().split("");
 
   numberArray.map((num: string, idx) => {
-    const numRange = numberArray.length - idx;
+    const numRange = numberArray.length - idx; // 1 - units, 2 - tens, 3 - hubdreds, 4 - tousands
 
     return baseNumbers[parseInt(num)].forEach((coordinates: number[], i) => {
       const [x, y] = coordinates;
@@ -43,9 +45,9 @@ const draw = ({ ctx, number, width, height }: IDrawParams) => {
       }
 
       if (!i) {
-        ctx.moveTo(x, y);
+        ctx.moveTo(x, y); // first coordinate indicates starting point for drawing
       } else {
-        ctx.lineTo(x, y);
+        ctx.lineTo(x, y); // next coordinates are udes for drawing lines
       }
 
       ctx.restore();

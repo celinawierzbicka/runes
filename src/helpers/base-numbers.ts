@@ -7,6 +7,7 @@ interface IParams {
   lineWidth: number;
 }
 
+// getBaseNumbersCoordinates() generates coordinates to draw symbols of 0-9 digits
 // lineWidth param is used to fix the issue of cutting half of the stroke when drawn on the edge of canvas
 export const getBaseNumbersCoordinates = ({
   width,
